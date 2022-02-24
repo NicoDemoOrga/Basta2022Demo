@@ -8,7 +8,9 @@ on:
 
 jobs:
   build:
-
+    env:
+      solutionpath: .\WinNetCoreApp\
+      
     runs-on: windows-latest
 
     steps:
@@ -18,8 +20,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ${{ env.solutionpath }}
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ${{ env.solutionpath }} --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ${{ env.solutionpath }} --no-build --verbosity normal
